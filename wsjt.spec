@@ -89,7 +89,6 @@ make
 %files
 %{_bindir}/wsjt.py
 %{_bindir}/wsjt
-%dir %{_bindir}
 %dir %attr(0755 root root) "%{_datadir}/doc/wsjt"
 %doc %attr(0644 root root) "%{_datadir}/doc/wsjt/WSJT_User_600.pdf"
 %doc %attr(0644 root root) "%{_datadir}/doc/wsjt/WSJT_Quick_Reference.pdf"
