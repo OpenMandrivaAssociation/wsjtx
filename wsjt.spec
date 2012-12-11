@@ -101,3 +101,11 @@ make
 
 %files -n python-%{name}
 %{py_sitedir}/WsjtMod
+
+
+%changelog
+* Thu May 10 2012 Alexander Khrukin <akhrukin@mandriva.org> 9.1.r2512-1
++ Revision: 798045
+- dir packaging fix
+- imported package wsjt
+
