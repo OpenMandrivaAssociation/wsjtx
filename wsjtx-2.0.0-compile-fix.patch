@@ -1,0 +1,89 @@
+--- a/wsjtx/CMakeLists.txt
++++ b/wsjtx/CMakeLists.txt
+@@ -822,14 +822,12 @@ find_program(ETAGS etags)
+ #
+ # Boost
+ #
+-set (Boost_NO_SYSTEM_PATHS TRUE)
++set (Boost_NO_SYSTEM_PATHS TRUE CACHE BOOL "")
+ if (Boost_NO_SYSTEM_PATHS)
+   set (BOOST_ROOT ${PROJECT_SOURCE_DIR}/boost)
+ endif ()
+-find_package (Boost 1.63 REQUIRED)
+-if (Boost_FOUND)
+-  include_directories (${Boost_INCLUDE_DIRS})
+-endif ()
++find_package (Boost REQUIRED)
++include_directories (${Boost_INCLUDE_DIRS})
+ 
+ #
+ # OpenMP
+@@ -844,7 +842,7 @@ find_package (FFTW3 COMPONENTS double si
+ #
+ # libhamlib setup
+ #
+-set (hamlib_STATIC 1)
++set (hamlib_STATIC 1 CACHE BOOL "")
+ find_package (hamlib 3 REQUIRED)
+ find_program (RIGCTL_EXE rigctl)
+ find_program (RIGCTLD_EXE rigctld)
+@@ -1305,7 +1303,8 @@ else ()
+       )
+   endif ()
+ endif ()
+-qt5_use_modules (wsjtx SerialPort) # not sure why the interface link library syntax above doesn't work
++find_package(Qt5SerialPort)
++target_link_libraries (wsjtx Qt5::SerialPort) # not sure why the interface link library syntax above doesn't work
+ 
+ # make a library for WSJT-X UDP servers
+ # add_library (wsjtx_udp SHARED ${UDP_library_CXXSRCS})
+@@ -1326,7 +1325,7 @@ set_target_properties (wsjtx_udp-static
+   )
+ target_compile_definitions (wsjtx_udp-static PUBLIC UDP_STATIC_DEFINE)
+ #qt5_use_modules (wsjtx_udp Network)
+-qt5_use_modules (wsjtx_udp-static Network Gui)
++target_link_libraries (wsjtx_udp-static Qt5::Network Qt5::Gui)
+ generate_export_header (wsjtx_udp-static BASE_NAME udp)
+ 
+ add_executable (udp_daemon UDPExamples/UDPDaemon.cpp UDPExamples/udp_daemon.rc ${WSJTX_ICON_FILE})
+@@ -1404,27 +1403,6 @@ install (TARGETS ft8code jt65code qra64c
+   )
+ endif(WSJT_BUILD_UTILS)  
+ 
+-install (PROGRAMS
+-  ${RIGCTL_EXE}
+-  DESTINATION ${CMAKE_INSTALL_BINDIR}
+-  #COMPONENT runtime
+-  RENAME rigctl-wsjtx${CMAKE_EXECUTABLE_SUFFIX}
+-  )
+-
+-install (PROGRAMS
+-  ${RIGCTLD_EXE}
+-  DESTINATION ${CMAKE_INSTALL_BINDIR}
+-  #COMPONENT runtime
+-  RENAME rigctld-wsjtx${CMAKE_EXECUTABLE_SUFFIX}
+-  )
+-
+-install (PROGRAMS
+-  ${RIGCTLCOM_EXE}
+-  DESTINATION ${CMAKE_INSTALL_BINDIR}
+-  #COMPONENT runtime
+-  RENAME rigctlcom-wsjtx${CMAKE_EXECUTABLE_SUFFIX}
+-  )
+-
+ install (FILES
+   README
+   COPYING
+--- a/wsjtx/HamlibTransceiver.hpp
++++ b/wsjtx/HamlibTransceiver.hpp
+@@ -1,6 +1,10 @@
+ #ifndef HAMLIB_TRANSCEIVER_HPP_
+ #define HAMLIB_TRANSCEIVER_HPP_
+ 
++#ifndef RIG_PASSBAND_NOCHANGE
++#define RIG_PASSBAND_NOCHANGE RIG_PASSBAND_NORMAL
++#endif
++
+ #include <tuple>
+ 
+ #include <QString>
