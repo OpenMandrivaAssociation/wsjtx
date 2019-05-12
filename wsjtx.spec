@@ -15,6 +15,7 @@ BuildRequires:	cmake
 BuildRequires:	desktop-file-utils
 BuildRequires:	libgomp-devel
 BuildRequires:	gcc-gfortran
+BuildRequires:	boost-devel
 BuildRequires:	pkgconfig(fftw3)
 BuildRequires:	pkgconfig(hamlib)
 BuildRequires:	pkgconfig(libxslt)
