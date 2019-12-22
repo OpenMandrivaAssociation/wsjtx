@@ -49,7 +49,7 @@ the following modes: FT8, JT4, JT9, JT65, QRA64, ISCAT, MSK144, WSPR and Echo.
 # remove bundled hamlib
 rm -f src/hamlib.tgz*
 tar -xzf src/%{name}.tgz
-%patch0 -p1
+#patch0 -p1
 # remove archive
 rm -f src/wsjtx.tgz*
 pushd %{name}
