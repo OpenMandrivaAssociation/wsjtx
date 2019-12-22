@@ -12,6 +12,7 @@ Source0:	http://www.physics.princeton.edu/pulsar/K1JT/%{name}-%{version}.tgz
 
 BuildRequires:	asciidoc
 BuildRequires:	cmake
+BuildRequires:       cmake(Qt5LinguistTools)
 BuildRequires:	desktop-file-utils
 BuildRequires:	libgomp-devel
 BuildRequires:	gcc-gfortran
