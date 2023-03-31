@@ -3,7 +3,7 @@
 Name:		wsjtx
 Summary:	Provides all popular modes for Weak Signal digital Amateur Radio
 Version:	2.0.1
-Release:	%mkrel 2
+Release:	3
 License:	GPLv3
 Url:		http://www.physics.princeton.edu/pulsar/K1JT/wsjtx.html
 Group:		Communications/Radio
