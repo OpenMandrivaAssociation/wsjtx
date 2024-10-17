@@ -5,7 +5,7 @@ Summary:	Provides all popular modes for Weak Signal digital Amateur Radio
 Version:	2.0.1
 Release:	3
 License:	GPLv3
-Url:		http://www.physics.princeton.edu/pulsar/K1JT/wsjtx.html
+Url:		https://www.physics.princeton.edu/pulsar/K1JT/wsjtx.html
 Group:		Communications/Radio
 Source0:	http://www.physics.princeton.edu/pulsar/K1JT/%{name}-%{version}.tgz
 Patch0:		wsjtx-2.0.0-compile-fix.patch
